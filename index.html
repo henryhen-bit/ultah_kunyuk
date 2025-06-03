@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="theme-color" content="#ffffff" />
-  <title>Barakallahu fii Umrik</title>
+  <title>Si Opett Ultah, kunyuk emang</title>
   <style>
     * {
       margin: 0; padding: 0;
@@ -142,14 +142,14 @@
         ? "Anjir tua banget, mati aja lu kunyuk! 😂"
         : "Semoga diberikan kesabaran dan kebijaksanaan yang terus bertambah 🌟";
 
-      hasil.innerHTML = `Lu skrng udh <strong>${umur} tahun</strong>. ${doa}`;
+      hasil.innerHTML = `Lu skrng masi <strong>${umur} tahun</strong>. ${doa}`;
 
       confetti();
       audio.play();
     }
 
     function confetti() {
-      const duration = 120000;
+      const duration = 3200;
       const end = Date.now() + duration;
 
       (function frame() {
@@ -160,7 +160,7 @@
         particle.style.top = Math.random() * 100 + "vh";
         particle.style.fontSize = "1.2rem";
         particle.style.color = colors[Math.floor(Math.random() * colors.length)];
-        particle.innerText = "✨";
+        particle.innerText = "🥳";
         particle.style.zIndex = 1000;
 
         document.body.appendChild(particle);
