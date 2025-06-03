@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="theme-color" content="#ffffff" />
+  <title>Barakallahu fii Umrik</title>
+  <style>
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #fdfcfb, #e2d1c3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .container {
+      background-color: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #2d3748;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #4a5568;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .barakallah {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2c5282;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group {
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    input {
+      padding: 0.6rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 0.5rem;
+      width: 100%;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.75rem 1.2rem;
+      font-size: 1rem;
+      background-color: #3182ce;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #2b6cb0;
+    }
+
+    .result {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      color: #2f855a;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.5rem; }
+      .barakallah { font-size: 1.3rem; }
+      .container { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Barakallahu fii Umrik 🎉</h1>
+    <p>Semoga Allah selalu ngasi lu cobaan kunyuk awokawok, makin sering marah2 dan anggota grup lu makin berkurang.</p>
+    <div class="barakallah">🎂 Ayo tebak umur dulu kunyuk!</div>
+
+    <div class="input-group">
+      <label for="tahun">Tahun berapa elu netas:</label>
+      <input type="number" id="tahun" placeholder="Contoh: 2000 tahun sebelum masehi" />
+    </div>
+
+    <button onclick="tebakUmur()">Tebak Masa Netas</button>
+    <div class="result" id="hasil"></div>
+  </div>
+
+  <!-- Audio Doa -->
+  <audio id="barakallahAudio" src="barakallah.mp3" preload="auto"></audio>
+
+  <script>
+    function tebakUmur() {
+      const tahun = document.getElementById('tahun').value;
+      const hasil = document.getElementById('hasil');
+      const tahunSekarang = new Date().getFullYear();
+      const audio = document.getElementById('barakallahAudio');
+
+      if (!tahun || tahun > tahunSekarang || tahun < 1900) {
+        hasil.innerText = "Ga valid anjir 😅";
+        return;
+      }
+
+      const umur = tahunSekarang - tahun;
+      const doa = umur < 20
+        ? "Anjir, lu masi bocil. Netek aja dulu kunyuk! AWOKAWOKAWOK"
+        : umur < 40
+        ? "Anjir tua banget, mati aja lu kunyuk! 😂"
+        : "Semoga diberikan kesabaran dan kebijaksanaan yang terus bertambah 🌟";
+
+      hasil.innerHTML = `Lu skrng udh <strong>${umur} tahun</strong>. ${doa}`;
+
+      confetti();
+      audio.play();
+    }
+
+    function confetti() {
+      const duration = 1200;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        const colors = ['#3182ce', '#2f855a', '#ecc94b', '#d53f8c'];
+        const particle = document.createElement("div");
+        particle.style.position = "fixed";
+        particle.style.left = Math.random() * 100 + "vw";
+        particle.style.top = Math.random() * 100 + "vh";
+        particle.style.fontSize = "1.2rem";
+        particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+        particle.innerText = "✨";
+        particle.style.zIndex = 1000;
+
+        document.body.appendChild(particle);
+
+        setTimeout(() => {
+          document.body.removeChild(particle);
+        }, 1000);
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+  </script>
+</body>
+</html>
